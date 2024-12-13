@@ -7,7 +7,7 @@ import appRoutes from './routes/appRoutes.js'
 import apiRoutes from './routes/apiRoutes.js'
 import db from './config/db.js'
 
-//crear la app
+//crear la app 
 const app = express()
 
 //habilitar lectura de datos de formularios

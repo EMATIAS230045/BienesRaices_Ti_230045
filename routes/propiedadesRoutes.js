@@ -19,6 +19,12 @@ router.post('/propiedades/crear', protegerRuta,
     body('habitaciones').isNumeric().withMessage('Selecciona la cantidad de habitaciones'),
     body('estacionamiento').isNumeric().withMessage('Selecciona la cantidad de estacionamientos'),
     body('wc').isNumeric().withMessage('Selecciona la cantidad de wc'),
+    body().custom((_, { req }) => {
+        if (!req.body['renta'] && !req.body['venta']) {
+            throw new Error('Especifica si la propiedad se vende o se renta');
+        }
+        return true;
+    }),
     body('lat').notEmpty().withMessage('Ubica la propiedad en el mapa'),
     guardar)
 router.get('/propiedades/agregar-imagen/:id',

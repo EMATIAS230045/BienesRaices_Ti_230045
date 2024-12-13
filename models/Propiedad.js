@@ -28,6 +28,14 @@ const Propiedad = db.define('propiedades', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
+    renta: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
+    },
+    venta: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true
+    },
     calle: {
         type: DataTypes.STRING(60),
         allowNull: false

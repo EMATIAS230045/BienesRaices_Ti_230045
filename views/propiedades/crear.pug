@@ -70,6 +70,21 @@ block contenido
                                 while n < 5
                                     option(value=n selected= datos.wc ? datos.wc == n ? true : false : null) #{n++}
 
+                    div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
+                        div.max-w-max 
+                            input(type="radio" id="check-renta" class="hidden" name="renta" value=false checked= datos.renta ? true : false)
+                            label.inline-flex.items-center.justify-between.w-full.p-5.text-gray-500.bg-white.border-2.border-gray-200.rounded-lg.cursor-pointer(for="check-renta" class="dark:hover:text-gray-300 dark:border-gray-300 peer-checked:bg-redNCS hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-white dark:hover:bg-gray-200 hover:border-white peer-checked:border-white transition ease-in-out")
+                                div(class="block peer-hover:text-white") 
+                                    //- svg
+                                    p.block.text-sm.uppercase.text-gray-900.mb-3.font-bold.w-full Renta
+                                    p.text-sm.text-black.w-full.font-semibold Yo quiero rentar mi inmueble
+                        div.max-w-max 
+                            input(type="radio" id="check-venta" class="hidden " name="venta" value=false checked= datos.venta ? true : false)
+                            label.inline-flex.items-center.justify-between.w-full.p-5.text-gray-500.bg-white.border-2.border-gray-200.rounded-lg.cursor-pointer(for="check-venta" class="dark:hover:text-gray-300 dark:border-gray-300 peer-checked:bg-redNCS hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-white dark:hover:bg-gray-200 hover:border-white peer-checked:border-white transition ease-in-out")
+                                div(class="block peer-hover:text-white") 
+                                    //- svg
+                                    p.block.text-sm.uppercase.text-gray-900.mb-3.font-bold.w-full Venta
+                                    p.text-sm.text-black.w-full.font-semibold Yo quiero vender mi inmueble 
                     div.border-gray-200.border-t.py-5.space-y-5
                         h3.text-lg.leading-6.font-medium.text-gray-900 Ubicación
                         p.text-gray-600 Ubica la propiedad en el mapa                
@@ -90,3 +105,4 @@ block scripts
     script(src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geosearch/2.7.0/bundle.min.js")
     script(src="/js/mapa.js")
+    script(src="/js/checkboxes.js")

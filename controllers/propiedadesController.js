@@ -389,7 +389,7 @@ const enviarMensaje = async (req, res) => {
 
     if (!propiedad) {
         return res.redirect('/404')
-    }
+    } 
 
 
     //renderizar errores

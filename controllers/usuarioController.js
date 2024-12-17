@@ -170,16 +170,23 @@ const registrar = async (req, res) => {
 //? Procesar una imagen de perfil
 const agregarFotoPerfil = async (req, res, next) => {
     const { usuarioId } = req.body
+    ;
     try {
-        const usuario = await Usuario.findByPk(usuarioId)
-        usuario.image = req.file.filename
-        await usuario.save()
+        const usuario = await Usuario.findByPk(usuarioId);
+        if (req.file) {
+            usuario.image = req.file.filename;
+        } else {
+            usuario.image = 'imagen.png';
+        }
+        await usuario.save();
         res.redirect(`/mensaje?usuarioId=${usuarioId}`);
         next()
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-}
+};
+
+export default agregarFotoPerfil;
 
 //Funcion que comprueba una cuenta
 const confirmar = async (req, res) => {

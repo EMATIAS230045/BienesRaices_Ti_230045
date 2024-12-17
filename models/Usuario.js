@@ -16,10 +16,15 @@ const Usuario = db.define('usuarios', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    nacimientoEdad :{
+		type: DataTypes.DATE,
+		allowNull: false
+    },
     token: {
         type: DataTypes.STRING
     },
-    confirmado: DataTypes.BOOLEAN
+    confirmado: DataTypes.BOOLEAN,
+    image: DataTypes.STRING
 }, {
     hooks: {
         beforeCreate: async function (usuario) {

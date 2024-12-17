@@ -12,6 +12,5 @@ div(class="bg-white shadow-lg rounded-xl")
             span(class="text-gray-800 font-bold")= propiedad.wc
         p(class="text-lg text-gray-600 font-bold")= propiedad.venta ? 'En venta' : 'En renta'
         p(class="text-sm text-gray-600")= propiedad.venta ? 'Precio: ' : 'Renta: '
-            span(class="text-gray-800 font-bold")= propiedad.precio.nombre
-        center
-            a.bg-redNCS.w-48.mt-5.text-center.block.font-bold.text-white.p-2.uppercase.rounded-lg(href=`/propiedad/${propiedad.id}`) Ver Propiedad          
+            span(class="text-gray-800 font-bold")= propiedad.precio.nombre 
+        a(href=`/propiedad/${propiedad.id}` class="bg-mati4 w-full text-center block font-bold text-white p-2 uppercase rounded-lg") Ver Propiedad        

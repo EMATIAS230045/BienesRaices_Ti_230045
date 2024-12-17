@@ -28,7 +28,8 @@ block contenido
         .mt-8.mx-auto.max-w-md 
             .bg-white.py-8.px-4.shadow
                 form.space-y-5(method="POST" action="/auth/registro" novalidate)
-                    input(type="hidden" name="_csrf" value= csrfToken) 
+                    input(type="hidden" name="_csrf" value= csrfToken)
+                    input(type="hidden" name="usuarioId" value=usuarioId)
                     div 
                         label.block.text-sm.uppercase.text-gray-500.mb-3.font-bold(for="nombre") Tu Nombre
                         input#nombre.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Escribe tu nombre" type="text" name="nombre" value= usuario ? usuario.nombre : '')
@@ -43,7 +44,7 @@ block contenido
                         input#repetir_password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Repite tu password" type="password" name="repetir_password")         
                     div
                         label.block.text-sm.text-gray-600(for="fechaNacimiento") Fecha de Nacimiento
-                        input#fechaNacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md(placeholder="Ingresa tu fecha de nacimiento" type="date" name="edad" required)      
+                        input#fechaNacimiento.w-full.px-3.py-2.border.border-gray-300.rounded-md(placeholder="Ingresa tu fecha de nacimiento" type="date" name="nacimientoEdad" required)      
                     div.flex.items-center.justify-between 
                         a.text-gray-500.text-xs(href="/auth/login") ¿Ya tienes cuenta? Inicia Sesión
                         a.text-gray-500.text-xs(href="/auth/olvide-password") Olvide mi Password 

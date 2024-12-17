@@ -92,7 +92,7 @@ const registrar = async (req, res) => {
     await check('email').isEmail().withMessage('Eso no parece un email').run(req)
     await check('password').isLength({ min: 8 }).withMessage('El password debe ser de almenos 8 caracteres').run(req)
     await check('repetir_password').equals(req.body.password).withMessage('Los password no coinciden').run(req)
-    await check('edad')
+    await check('nacimientoEdad')
     .notEmpty().withMessage('La fecha de nacimiento es obligatoria')
     .custom((value) => {
       const hoy = new Date();
@@ -127,7 +127,7 @@ const registrar = async (req, res) => {
 
     //Extraer los datos
 
-    const { nombre, email, password, edad } = req.body
+    const { nombre, email, password, nacimientoEdad } = req.body
 
     //verificar que el usuario no este duplicado
     const existeUsuario = await Usuario.findOne({ where: { email } })
@@ -148,7 +148,7 @@ const registrar = async (req, res) => {
         nombre,
         email,
         password,
-        edad,
+        nacimientoEdad,
         token: generateID()
     })
 

@@ -1,6 +1,6 @@
 import express from "express";
-import { formularioLogin, formularioRegistro, registrar, confirmar, formularioOlvidePassword, resetPassword, comprobarToken, nuevoPassword, autenticar, cerrarSesion, agregarFotoPerfil } from "../controllers/usuarioController.js";
-import upload from '../middleware/subirFotoPerfil.js';
+import { formularioLogin, formularioRegistro, registrar,agregarFotoPerfil, confirmar, formularioOlvidePassword, resetPassword, comprobarToken, nuevoPassword, autenticar, cerrarSesion } from "../controllers/usuarioController.js";
+import upload from '../middleware/SubirFotoPerfil.js'
 import Usuario from '../models/Usuario.js'
 const router = express.Router();
 //Routing
@@ -8,7 +8,6 @@ router.get('/login', formularioLogin);
 router.post('/login', autenticar);
 
 //cerrar sesión 
-
 router.post('/cerrar-sesion', cerrarSesion)
 
 router.get('/registro', formularioRegistro);

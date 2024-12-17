@@ -110,7 +110,7 @@ const buscador = async (req, res) => {
             titulo: {
                 [Sequelize.Op.like] : '%' + termino + '%'
             }
-        },
+        }, 
         include: [
             {model: Precio, as: 'precio'},
             {model: Usuario, as: 'usuario'}   

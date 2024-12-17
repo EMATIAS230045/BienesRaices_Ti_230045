@@ -90,9 +90,25 @@ const registrar = async (req, res) => {
     //validación
     await check('nombre').notEmpty().withMessage('El nombre no puede ir vacio').run(req)
     await check('email').isEmail().withMessage('Eso no parece un email').run(req)
-    await check('password').isLength({ min: 6 }).withMessage('El password debe ser de almenos 6 caracteres').run(req)
+    await check('password').isLength({ min: 8 }).withMessage('El password debe ser de almenos 8 caracteres').run(req)
     await check('repetir_password').equals(req.body.password).withMessage('Los password no coinciden').run(req)
-
+    await check('edad')
+    .notEmpty().withMessage('La fecha de nacimiento es obligatoria')
+    .custom((value) => {
+      const hoy = new Date();
+      const fechaNacimiento = new Date(value);
+      
+      // Calcula la diferencia en años entre la fecha de hoy y la fecha de nacimiento
+      const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+  
+      // Si la diferencia es menor a 18 o si cumple 18 años en el año actual pero aún no ha llegado a su cumpleaños
+      if (edad < 18 || (edad === 18 && hoy < new Date(fechaNacimiento.setFullYear(hoy.getFullYear())))) {
+        throw new Error('Debes ser mayor de 18 años para registrarte');
+      }
+  
+      return true;
+    })
+    .run(req);
     let resultado = validationResult(req)
 
 
@@ -111,7 +127,7 @@ const registrar = async (req, res) => {
 
     //Extraer los datos
 
-    const { nombre, email, password } = req.body
+    const { nombre, email, password, edad } = req.body
 
     //verificar que el usuario no este duplicado
     const existeUsuario = await Usuario.findOne({ where: { email } })
@@ -132,6 +148,7 @@ const registrar = async (req, res) => {
         nombre,
         email,
         password,
+        edad,
         token: generateID()
     })
 
@@ -141,13 +158,27 @@ const registrar = async (req, res) => {
         email: usuario.email,
         token: usuario.token
     })
+    
 
+    // Renderizar la vista de agregar imagen
+    res.render('auth/agregar-imagen', {
+        csrfToken: req.csrfToken(),
+        usuarioId: usuario.id
+    });
+}
 
-    //Mostrar mensaje de confirmación
-    res.render('templates/message', {
-        pagina: 'Cuenta creada correctamente',
-        mensaje: 'Hemos enviado un email de confirmación, presiona en el enlace'
-    })
+//? Procesar una imagen de perfil
+const agregarFotoPerfil = async (req, res, next) => {
+    const { usuarioId } = req.body
+    try {
+        const usuario = await Usuario.findByPk(usuarioId)
+        usuario.image = req.file.filename
+        await usuario.save()
+        res.redirect(`/mensaje?usuarioId=${usuarioId}`);
+        next()
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 //Funcion que comprueba una cuenta
@@ -251,7 +282,7 @@ const comprobarToken = async (req, res) => {
 
 const nuevoPassword = async (req, res) => {
     //validar el password
-    await check('password').isLength({ min: 6 }).withMessage('El password debe ser de almenos 6 caracteres').run(req)
+    await check('password').isLength({ min: 8 }).withMessage('El password debe ser de almenos 8 caracteres').run(req)
 
     let resultado = validationResult(req)
 
@@ -294,5 +325,6 @@ export {
     formularioOlvidePassword,
     resetPassword,
     comprobarToken,
-    nuevoPassword
+    nuevoPassword,
+    agregarFotoPerfil
 }

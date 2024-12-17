@@ -575,6 +575,9 @@ video {
 .mt-8 {
   margin-top: 2rem;
 }
+.mt-1 {
+  margin-top: 0.25rem;
+}
 .block {
   display: block;
 }
@@ -994,6 +997,10 @@ video {
 .text-yellow-800 {
   --tw-text-opacity: 1;
   color: rgb(133 77 14 / var(--tw-text-opacity));
+}
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .placeholder-gray-400::-moz-placeholder {
   --tw-placeholder-opacity: 1;
